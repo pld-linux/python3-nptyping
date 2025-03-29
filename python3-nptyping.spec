@@ -6,7 +6,7 @@ Summary:	Type hints for NumPy
 Summary(pl.UTF-8):	Podpowiedzi typów dla NumPy
 Name:		python3-nptyping
 Version:	2.5.0
-Release:	4
+Release:	5
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/nptyping/
@@ -44,6 +44,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %setup -q -n nptyping-%{version}
 
 find -name '*.py' -print0 | xargs -0 %{__sed} -i -e 's/\r$//'
+%{__sed} -i -e 's/\r$//' dependencies/*.txt
 
 %patch -P0 -p1
 
