@@ -6,12 +6,13 @@ Summary:	Type hints for NumPy
 Summary(pl.UTF-8):	Podpowiedzi typów dla NumPy
 Name:		python3-nptyping
 Version:	2.5.0
-Release:	3
+Release:	4
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/nptyping/
 Source0:	https://files.pythonhosted.org/packages/source/n/nptyping/nptyping-%{version}.tar.gz
 # Source0-md5:	08bddbff6a31f7e42d59ec1d4819d0e5
+Patch0:		numpy2.patch
 URL:		https://pypi.org/project/nptyping/
 BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools
@@ -41,6 +42,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %prep
 %setup -q -n nptyping-%{version}
+
+find -name '*.py' -print0 | xargs -0 %{__sed} -i -e 's/\r$//'
+
+%patch -P0 -p1
 
 # requires beartype (TODO)
 %{__rm} tests/test_beartype.py
